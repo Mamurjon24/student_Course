@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/course")
@@ -27,8 +28,8 @@ public class CourseController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody CourceDTO studentDTO) {
-        CourceDTO response = courseService.crate(studentDTO);
+    public ResponseEntity<?> create(@RequestBody CourceDTO dto) {
+        CourceDTO response = courseService.crate(dto);
         return ResponseEntity.ok(response);
     }
 

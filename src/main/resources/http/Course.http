@@ -1,0 +1,52 @@
+### Student List
+GET http://localhost:8080/course/list
+
+
+### Student Create
+POST http://localhost:8080/course/create
+Content-Type: application/json
+
+{
+  "name": "1C",
+  "price": 100,
+  "duration": 6.0
+}
+
+### Student Create List
+POST http://localhost:8080/course/create
+Content-Type: application/json
+
+[
+  {
+    "name": "C#",
+    "price": 500,
+    "duration": 9.0
+  },
+  {
+    "name": "HTML",
+    "price": 300,
+    "duration": 2.0
+  },
+  {
+    "name": "CSS",
+    "price": 200,
+    "duration": 1.0
+  }
+]
+
+### Student Update
+PUT http://localhost:8080/student/updateStudent/
+Content-Type: application/json
+
+{
+  "name": "Java",
+  "price": 900,
+  "duration": 9.0
+}
+
+
+### Student Get Id
+GET http://localhost:8080/student/getStudent/
+
+### Student Delete
+DELETE http://localhost:8080/student/deleteStudent/

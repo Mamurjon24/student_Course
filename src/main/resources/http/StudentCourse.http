@@ -1,0 +1,92 @@
+### StudentBook List
+GET http://localhost:8080/studentBook/listStudentBook
+
+
+### StudentBook Create
+POST http://localhost:8080/studentBook/createStudentBook
+Content-Type: application/json
+
+{
+  "student": {
+    "name": "Eshmat",
+    "surName": "Eshmatov",
+    "phone": "2",
+    "createdDate": "2000-01-03"
+  },
+  "book":   {
+    "title": "HTML",
+    "author": "Aliyev",
+    "publishYear": "2022-09-09"
+  },
+  "createdDate": "2023-03-28",
+  "returnedDate": "2023-03-30",
+  "duration": "2 days"
+}
+
+
+### StudentBook Create List
+POST http://localhost:8080/studentBook/create/allStudentBook
+Content-Type: application/json
+
+[
+  {
+    "student": {
+      "name": "Toshmat",
+      "surName": "Toshmatov",
+      "phone": "3",
+      "createdDate": "2002-11-05"
+    },
+    "book": {
+      "title": "JavaScript",
+      "author": "Eshmat",
+      "publishYear": "2005-06-03"
+    },
+    "createdDate": "2023-03-20",
+    "returnedDate": "2023-03-30",
+    "duration": "10 days"
+  },
+  {
+    "student": {
+      "name": "Jabbor",
+      "surName": "Jabborov",
+      "phone": "4",
+      "createdDate": "1999-09-15"
+    },
+    "book": {
+      "title": "C++",
+      "author": "Toshmat",
+      "publishYear": "2012-11-11"
+    },
+    "createdDate": "2023-03-01",
+    "returnedDate": "2023-03-15",
+    "duration": "15 days"
+  }
+]
+
+### StudentBook Update
+PUT http://localhost:8080/studentBook/updateStudentBook/f7faa834-d834-4bb7-84a1-4246fa81cb56
+Content-Type: application/json
+
+{
+  "student": {
+    "name": "Rashid",
+    "surName": "Rashidov",
+    "phone": "5",
+    "createdDate": "1999-12-11"
+  },
+  "book": {
+    "title": "Go",
+    "author": "Clarc",
+    "publishYear": "2015-06-14"
+  },
+  "createdDate": "2023-03-10",
+  "returnedDate": "2023-03-22",
+  "duration": "12 days"
+}
+
+
+### StudentBook Get Id
+GET http://localhost:8080/studentBook/getStudentBook/
+
+### StudentBook Delete
+DELETE http://localhost:8080/studentBook/deleteStudentBook/

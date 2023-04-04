@@ -19,7 +19,7 @@ public class CourseEntity {
     @Column(name = "price")
     private Double price;
     @Column(name = "duration")
-    private LocalDateTime duration;
+    private Long duration;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 

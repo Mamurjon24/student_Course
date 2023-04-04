@@ -16,7 +16,7 @@ public class CourceDTO  {
     private Integer id;
     private String name;
     private Double price;
-    private LocalDateTime duration;
+    private Long duration;
     private LocalDateTime createdDate = LocalDateTime.now();
 
 }

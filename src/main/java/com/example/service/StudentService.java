@@ -68,7 +68,10 @@ public class StudentService {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setSurname(entity.getSurname());
-            //...
+            dto.setAge(entity.getAge());
+            dto.setGender(entity.getGender());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setLevel(entity.getLevel());
             dtoList.add(dto);
         });
         return dtoList;
