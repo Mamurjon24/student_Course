@@ -1,6 +1,10 @@
 package com.example.service;
 
+import com.example.dto.CourseDTO;
+import com.example.dto.StudentCourseDTO;
 import com.example.dto.StudentDTO;
+import com.example.entity.CourseEntity;
+import com.example.entity.StudentCourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.StudentRepository;
@@ -21,7 +25,7 @@ public class StudentService {
         StudentDTO dto = new StudentDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setSurname(entity.getSurname());
+        dto.setSurName(entity.getSurname());
         dto.setAge(entity.getAge());
         dto.setGender(entity.getGender());
         dto.setCreatedDate(entity.getCreatedDate());
@@ -32,7 +36,7 @@ public class StudentService {
     public boolean update(Integer id, StudentDTO dto) {
         StudentEntity entity = get(id);
         entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
+        entity.setSurname(dto.getSurName());
         entity.setAge(dto.getAge());
         entity.setGender(dto.getGender());
         entity.setLevel(dto.getLevel());
@@ -43,14 +47,14 @@ public class StudentService {
 
     public StudentDTO crate(StudentDTO dto) {
         StudentEntity entity = new StudentEntity();
-        entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
         if (dto.getName() == null || dto.getName().isBlank()) {
             throw new AppBadRequestException("Name qani?");
         }
-        if (dto.getSurname() == null || dto.getSurname().isBlank()) {
+        entity.setName(dto.getName());
+        if (dto.getSurName() == null || dto.getSurName().isBlank()) {
             throw new AppBadRequestException("Surname qani?");
         }
+        entity.setSurname(dto.getSurName());
         entity.setAge(dto.getAge());
         entity.setGender(dto.getGender());
         entity.setLevel(dto.getLevel());
@@ -67,7 +71,7 @@ public class StudentService {
             StudentDTO dto = new StudentDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setSurname(entity.getSurname());
+            dto.setSurName(entity.getSurname());
             dto.setAge(entity.getAge());
             dto.setGender(entity.getGender());
             dto.setCreatedDate(entity.getCreatedDate());
@@ -97,5 +101,27 @@ public class StudentService {
 
  //       Optional<StudentEntity> entity = studentRepository.findByPhone("123");
  //       System.out.println(entity);
+    }
+    public StudentDTO convertToDTO(StudentEntity entity) {
+        StudentDTO dto = new StudentDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurName(entity.getSurName());
+        dto.setLevel(entity.getLevel());
+        dto.setAge(entity.getAge());
+        dto.setGender(entity.getGender());
+        dto.setCreatedDate(entity.getCreatedDate());
+        return dto;
+    }
+    public StudentEntity convertToEntity(StudentDTO dto) {
+        StudentEntity entity = new StudentEntity();
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setSurname(dto.getSurName());
+        entity.setAge(dto.getAge());
+        entity.setGender(dto.getGender());
+        entity.setLevel(dto.getLevel());
+        entity.setCreatedDate(dto.getCreatedDate());
+        return entity;
     }
 }

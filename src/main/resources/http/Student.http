@@ -1,16 +1,17 @@
 ### Student List
-GET http://localhost:8080/student/studentList
+GET http://localhost:8080/student/list
 
 
 ### Student Create
-POST http://localhost:8080/student/createStudent
+POST http://localhost:8080/student/create
 Content-Type: application/json
 
 {
   "name": "Vali",
   "surName": "Valiev",
-  "phone": "1",
-  "createdDate": "1998-03-03"
+  "level": 1,
+  "age": 18,
+  "gender": "MAN"
 }
 
 ### Student Create List
@@ -39,19 +40,20 @@ Content-Type: application/json
 ]
 
 ### Student Update
-PUT http://localhost:8080/student/updateStudent/6eb504cf-53ea-4e15-a5c9-ebf240987e9c
+PUT http://localhost:8080/student/update/1
 Content-Type: application/json
 
 {
-  "name": "Ernest",
-  "surName": "Hemenguey",
-  "phone": "5",
-  "createdDate": "1880-09-20"
+  "name": "Ali",
+  "surName": "Aliyev",
+  "level": 2,
+  "age": 19,
+  "gender": "MAN"
 }
 
 
 ### Student Get Id
-GET http://localhost:8080/student/getStudent/6eb504cf-53ea-4e15-a5c9-ebf240987e9c
+GET http://localhost:8080/student/get/1
 
 ### Student Delete
-DELETE http://localhost:8080/student/deleteStudent/
+DELETE http://localhost:8080/student/delete/1

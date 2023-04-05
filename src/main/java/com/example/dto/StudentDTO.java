@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class StudentDTO {
     private Integer id;
     private String name;
-    private String surname;
+    private String surName;
     private Integer level;
     private Integer age;
     private StudentGender gender;

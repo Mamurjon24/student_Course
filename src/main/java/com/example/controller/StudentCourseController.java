@@ -1,8 +1,8 @@
 package com.example.controller;
 
 import com.example.dto.StudentCourseDTO;
-import com.example.dto.StudentDTO;
-import com.example.service.StudentService;
+import com.example.entity.StudentCourseEntity;
+import com.example.service.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,42 +10,42 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/student")
-public class StudentController {
+@RequestMapping(value = "/studentcourse")
+public class StudentCourseController {
     @Autowired
-    private StudentService studentService;
+    private StudentCourseService studentCourseService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<StudentDTO>> getAll() {
-        List<StudentDTO> list = studentService.getAll();
+    public ResponseEntity<List<StudentCourseDTO>> getAll() {
+        List<StudentCourseDTO> list = studentCourseService.getAll();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
-        StudentDTO dto = studentService.getById(id);
+        StudentCourseDTO dto = studentCourseService.getById(id);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody StudentDTO dto) {
-        StudentDTO response = studentService.crate(dto);
+    public ResponseEntity<?> create(@RequestBody StudentCourseDTO dto) {
+        StudentCourseDTO response = studentCourseService.create(dto);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody StudentDTO dto) {
-        return ResponseEntity.ok(studentService.update(id, dto));
+    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody StudentCourseDTO dto) {
+        return ResponseEntity.ok(studentCourseService.update(id, dto));
     }
 
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(studentService.delete(id));
+        return ResponseEntity.ok(studentCourseService.delete(id));
     }
 
     @GetMapping(value = "/test")
     public ResponseEntity<?> test() {
-        studentService.test();
+        studentCourseService.test();
         return ResponseEntity.ok().build();
     }
 }

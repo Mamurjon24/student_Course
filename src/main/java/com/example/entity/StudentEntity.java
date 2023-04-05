@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.example.dto.StudentDTO;
 import com.example.enums.StudentGender;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "student")
-public class StudentEntity {
+public class StudentEntity extends StudentDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

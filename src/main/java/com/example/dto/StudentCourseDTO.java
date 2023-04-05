@@ -1,5 +1,6 @@
 package com.example.dto;
 
+import com.example.entity.CourseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class StudentCourseDTO {
     private Integer id;
-    private Integer StudentId;
-    private Integer CourseId;
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private StudentDTO student;
+    private CourseDTO course;
     private Float mark;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
 }

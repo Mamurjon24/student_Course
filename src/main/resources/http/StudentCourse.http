@@ -1,30 +1,33 @@
-### StudentBook List
-GET http://localhost:8080/studentBook/listStudentBook
+### StudentCourse List
+GET http://localhost:8080/studentcourse/list
 
 
-### StudentBook Create
-POST http://localhost:8080/studentBook/createStudentBook
+### StudentCourse Create
+POST http://localhost:8080/studentcourse/create
 Content-Type: application/json
 
 {
   "student": {
-    "name": "Eshmat",
-    "surName": "Eshmatov",
-    "phone": "2",
-    "createdDate": "2000-01-03"
+    "id": 1,
+    "name": "Vali",
+    "surName": "Valiev",
+    "level": 1,
+    "age": 18,
+    "gender": "MAN",
+    "createdDate": "2023-04-05T15:21:17.5795324"
   },
-  "book":   {
-    "title": "HTML",
-    "author": "Aliyev",
-    "publishYear": "2022-09-09"
+  "course":  {
+    "id": 1,
+    "name": "1C",
+    "price": 100.0,
+    "duration": 6,
+    "createdDate": "2023-04-05T15:21:06.342104"
   },
-  "createdDate": "2023-03-28",
-  "returnedDate": "2023-03-30",
-  "duration": "2 days"
+  "mark": 5
 }
 
 
-### StudentBook Create List
+### StudentCourse Create List
 POST http://localhost:8080/studentBook/create/allStudentBook
 Content-Type: application/json
 
@@ -63,8 +66,8 @@ Content-Type: application/json
   }
 ]
 
-### StudentBook Update
-PUT http://localhost:8080/studentBook/updateStudentBook/f7faa834-d834-4bb7-84a1-4246fa81cb56
+### StudentCourse Update
+PUT http://localhost:8080/studentcourse/update/
 Content-Type: application/json
 
 {
@@ -85,8 +88,8 @@ Content-Type: application/json
 }
 
 
-### StudentBook Get Id
-GET http://localhost:8080/studentBook/getStudentBook/
+### StudentCourse Get Id
+GET http://localhost:8080/studentcourse/get/1
 
-### StudentBook Delete
-DELETE http://localhost:8080/studentBook/deleteStudentBook/
+### StudentCourse Delete
+DELETE http://localhost:8080/studentcourse/delete/

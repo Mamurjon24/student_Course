@@ -1,6 +1,5 @@
 package com.example.dto;
 
-import com.example.entity.CourseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourceDTO  {
+public class CourseDTO {
     private Integer id;
     private String name;
     private Double price;

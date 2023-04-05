@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.dto.StudentCourseDTO;
+import com.example.dto.StudentDTO;
 import com.example.entity.StudentCourseEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.StudentCourseRepository;
@@ -11,17 +12,22 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class StudentCourseService {
     @Autowired
     private StudentCourseRepository studentCourseRepository;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private CourseService courseService;
 
     public StudentCourseDTO getById(Integer id) {
         StudentCourseEntity entity = get(id);
         StudentCourseDTO dto = new StudentCourseDTO();
         dto.setId(entity.getId());
-        dto.setStudentId(entity.getStudentId());
-        dto.setCourseId(entity.getCourseId());
+        dto.setStudent(studentService.convertToDTO(entity.getStudent()));
+        dto.setCourse(courseService.convertToDTO(entity.getCourse()));
         dto.setCreatedDate(entity.getCreatedDate());
         dto.setMark(entity.getMark());
         return dto;
@@ -29,40 +35,34 @@ public class StudentCourseService {
 
     public boolean update(Integer id, StudentCourseDTO dto) {
         StudentCourseEntity entity = get(id);
-        entity.setStudentId(dto.getStudentId());
-        entity.setCourseId(dto.getCourseId());
+        entity.setStudent(studentService.convertToEntity(dto.getStudent()));
+        entity.setCourse(courseService.convertToEntity(dto.getCourse()));
         entity.setCreatedDate(dto.getCreatedDate());
         entity.setMark(dto.getMark());
         studentCourseRepository.save(entity);
         return true;
     }
 
-    public StudentCourseDTO crate(StudentCourseDTO dto) {
+    public StudentCourseDTO create(StudentCourseDTO dto) {
         StudentCourseEntity entity = new StudentCourseEntity();
-        if (dto.getStudentId() == null ) {
-            throw new AppBadRequestException("Student qani?");
-        }
-        entity.setStudentId(dto.getStudentId());
-        if (dto.getCourseId() == null) {
-            throw new AppBadRequestException("Course qani?");
-        }
-        entity.setCourseId(dto.getCourseId());
+        entity.setStudent(studentService.convertToEntity(dto.getStudent()));
+        entity.setCourse(courseService.convertToEntity(dto.getCourse()));
         entity.setCreatedDate(dto.getCreatedDate());
         entity.setMark(dto.getMark());
-        studentCourseRepository.save(entity);
+        entity = studentCourseRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
     }
 
+
     public List<StudentCourseDTO> getAll() {
         Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAll();
         List<StudentCourseDTO> dtoList = new LinkedList<>();
-
         iterable.forEach(entity -> {
             StudentCourseDTO dto = new StudentCourseDTO();
             dto.setId(entity.getId());
-            dto.setStudentId(entity.getStudentId());
-            dto.setCourseId(entity.getCourseId());
+            dto.setStudent(studentService.convertToDTO(entity.getStudent()));
+            dto.setCourse(courseService.convertToDTO(entity.getCourse()));
             dto.setCreatedDate(entity.getCreatedDate());
             dto.setMark(entity.getMark());
             dtoList.add(dto);

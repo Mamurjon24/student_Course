@@ -1,6 +1,7 @@
 package com.example.controller;
 
-import com.example.dto.CourceDTO;
+
+import com.example.dto.CourseDTO;
 import com.example.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,25 +17,25 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<CourceDTO>> getAll() {
-        List<CourceDTO> list = courseService.getAll();
+    public ResponseEntity<List<CourseDTO>> getAll() {
+        List<CourseDTO> list = courseService.getAll();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
-        CourceDTO dto = courseService.getById(id);
+        CourseDTO dto = courseService.getById(id);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody CourceDTO dto) {
-        CourceDTO response = courseService.crate(dto);
+    public ResponseEntity<?> create(@RequestBody CourseDTO dto) {
+        CourseDTO response = courseService.crate(dto);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody CourceDTO dto) {
+    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody CourseDTO dto) {
         return ResponseEntity.ok(courseService.update(id, dto));
     }
 

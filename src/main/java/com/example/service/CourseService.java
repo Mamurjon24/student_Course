@@ -1,6 +1,7 @@
 package com.example.service;
 
-import com.example.dto.CourceDTO;
+
+import com.example.dto.CourseDTO;
 import com.example.entity.CourseEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.CourseRepository;
@@ -15,9 +16,9 @@ import java.util.Optional;
 public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
-    public CourceDTO getById(Integer id) {
+    public CourseDTO getById(Integer id) {
         CourseEntity entity = get(id);
-        CourceDTO dto = new CourceDTO();
+        CourseDTO dto = new CourseDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());
@@ -26,7 +27,7 @@ public class CourseService {
         return dto;
     }
 
-    public boolean update(Integer id, CourceDTO dto) {
+    public boolean update(Integer id, CourseDTO dto) {
         CourseEntity entity = get(id);
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
@@ -36,7 +37,7 @@ public class CourseService {
         return true;
     }
 
-    public CourceDTO crate(CourceDTO dto) {
+    public CourseDTO crate(CourseDTO dto) {
         CourseEntity entity = new CourseEntity();
         entity.setName(dto.getName());
         if (dto.getName() == null || dto.getName().isBlank()) {
@@ -50,12 +51,12 @@ public class CourseService {
         return dto;
     }
 
-    public List<CourceDTO> getAll() {
+    public List<CourseDTO> getAll() {
         Iterable<CourseEntity> iterable = courseRepository.findAll();
-        List<CourceDTO> dtoList = new LinkedList<>();
+        List<CourseDTO> dtoList = new LinkedList<>();
 
         iterable.forEach(entity -> {
-            CourceDTO dto = new CourceDTO();
+            CourseDTO dto = new CourseDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setPrice(entity.getPrice());
@@ -86,6 +87,24 @@ public class CourseService {
 
    //     Optional<CourceDTO> entity = courseRepository.findByPhone("123");
     //    System.out.println(entity);
+    }
+    public CourseDTO convertToDTO(CourseEntity entity) {
+        CourseDTO dto = new CourseDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setPrice(entity.getPrice());
+        dto.setDuration(entity.getDuration());
+        dto.setCreatedDate(entity.getCreatedDate());
+        return dto;
+    }
+    public CourseEntity convertToEntity(CourseDTO dto) {
+        CourseEntity entity = new CourseEntity();
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setPrice(dto.getPrice());
+        entity.setDuration(dto.getDuration());
+        entity.setCreatedDate(dto.getCreatedDate());
+        return entity;
     }
 
 }

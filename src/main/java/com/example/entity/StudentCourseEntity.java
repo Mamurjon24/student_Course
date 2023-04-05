@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.example.dto.StudentDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +15,17 @@ public class StudentCourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "student_id")
-    private Integer studentId;
-    @Column(name = "course_id")
-    private Integer courseId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    private StudentEntity student;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private CourseEntity course;
     @Column(name = "mark")
     private Float mark;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
+
+
 }
