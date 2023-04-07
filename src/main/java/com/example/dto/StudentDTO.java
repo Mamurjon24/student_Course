@@ -19,5 +19,5 @@ public class StudentDTO {
     private Integer level;
     private Integer age;
     private StudentGender gender;
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDay = LocalDateTime.now();
 }

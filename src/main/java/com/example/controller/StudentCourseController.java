@@ -1,12 +1,15 @@
 package com.example.controller;
 
 import com.example.dto.StudentCourseDTO;
+import com.example.dto.StudentDTO;
 import com.example.entity.StudentCourseEntity;
+import com.example.entity.StudentEntity;
 import com.example.service.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -48,4 +51,13 @@ public class StudentCourseController {
         studentCourseService.test();
         return ResponseEntity.ok().build();
     }
+    @GetMapping(value = "/getMarkByStudentAndCreatedDate")
+    public ResponseEntity<List<StudentCourseDTO>> getMarkByStudentAndCreatedDate (@RequestParam("studentId") Integer studentId,
+                                                                                  @RequestParam("startDate") LocalDate startDate,
+                                                                                  @RequestParam("endDate") LocalDate endDate) {
+        List<StudentCourseDTO> list = studentCourseService.getMarkByStudentAndCreatedDate(studentId,startDate,endDate);
+        return ResponseEntity.ok(list);
+    }
+
+
 }

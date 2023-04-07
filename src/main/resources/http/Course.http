@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
   "name": "1C",
-  "price": 100,
+  "prise": 100,
   "duration": 6.0
 }
 
@@ -40,13 +40,28 @@ Content-Type: application/json
 
 {
   "name": "Java",
-  "price": 900,
+  "prise": 900,
   "duration": 9.0
 }
 
 
 ### Course Get Id
-GET http://localhost:8080/course/get/1
+GET http://localhost:8080/course/get/2
 
 ### Course Delete
 DELETE http://localhost:8080/course/delete/1
+
+### Course GetByName
+GET http://localhost:8080/course/getByName/Java
+
+### Course GetByPrise
+GET http://localhost:8080/course/getByPrise/100.0
+
+### Course GetByDuration
+GET http://localhost:8080/course/getByDuration/9
+
+### Course GetByBetweenPrise
+GET http://localhost:8080/course/getByBeetwenPrise?beginPrise=100&endPrise=1000
+
+### Course GetByBeetwenDate
+GET http://localhost:8080/course/getByBeetwenDate?beginDate=2023-04-06&endDate=2023-04-08

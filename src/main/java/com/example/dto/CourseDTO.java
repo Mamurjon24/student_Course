@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class CourseDTO {
     private Integer id;
     private String name;
-    private Double price;
+    private Double prise;
     private Long duration;
     private LocalDateTime createdDate = LocalDateTime.now();
 

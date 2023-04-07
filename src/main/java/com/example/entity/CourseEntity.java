@@ -16,8 +16,8 @@ public class CourseEntity {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "prise")
+    private Double prise;
     @Column(name = "duration")
     private Long duration;
     @Column(name = "created_date")

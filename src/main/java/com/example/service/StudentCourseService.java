@@ -1,14 +1,17 @@
 package com.example.service;
 
 import com.example.dto.StudentCourseDTO;
-import com.example.dto.StudentDTO;
 import com.example.entity.StudentCourseEntity;
+import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.StudentCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +57,6 @@ public class StudentCourseService {
         return dto;
     }
 
-
     public List<StudentCourseDTO> getAll() {
         Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAll();
         List<StudentCourseDTO> dtoList = new LinkedList<>();
@@ -90,5 +92,21 @@ public class StudentCourseService {
 
         //       Optional<StudentEntity> entity = studentRepository.findByPhone("123");
         //       System.out.println(entity);
+    }
+
+    public List<StudentCourseDTO> getMarkByStudentAndCreatedDate(Integer studentId,LocalDate startDate, LocalDate endDate) {
+        Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAllByStudentIdAndCreatedDateBetween(studentId,
+                startDate.atStartOfDay(),LocalDateTime.of(endDate,LocalTime.MAX));
+        List<StudentCourseDTO> dtoList = new LinkedList<>();
+        iterable.forEach(entity -> {
+            StudentCourseDTO dto = new StudentCourseDTO();
+            dto.setId(entity.getId());
+            dto.setStudent(studentService.convertToDTO(entity.getStudent()));
+            dto.setCourse(courseService.convertToDTO(entity.getCourse()));
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setMark(entity.getMark());
+            dtoList.add(dto);
+        });
+        return dtoList;
     }
 }

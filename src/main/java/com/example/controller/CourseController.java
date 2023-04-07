@@ -2,13 +2,14 @@ package com.example.controller;
 
 
 import com.example.dto.CourseDTO;
+import com.example.dto.StudentDTO;
 import com.example.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/course")
@@ -49,4 +50,38 @@ public class CourseController {
         courseService.test();
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/getByName/{name}")
+    public ResponseEntity<?> getByName(@PathVariable("name") String name) {
+        CourseDTO dto = courseService.getByName(name);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/getByPrise/{prise}")
+    public ResponseEntity<?> getByPrise(@PathVariable("prise") Double prise) {
+        CourseDTO dto = courseService.getByPrise(prise);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/getByDuration/{duration}")
+    public ResponseEntity<?> getByDuration(@PathVariable("duration") Long duration) {
+        CourseDTO dto = courseService.getByDuration(duration);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/getByBeetwenPrise")
+    public ResponseEntity<List<CourseDTO>> getByBeetwenPrise(@RequestParam("beginPrise") Double beginPrise,
+                                                             @RequestParam("endPrise") Double endPrise) {
+        List<CourseDTO> list = courseService.getByBeetwenPrise(beginPrise, endPrise);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/getByBeetwenDate")
+    public ResponseEntity<List<CourseDTO>> getByBeetwenDate(@RequestParam("beginDate") LocalDate beginDate,
+                                                             @RequestParam("endDate") LocalDate endDate) {
+        List<CourseDTO> list = courseService.getByBeetwenDate(beginDate, endDate);
+        return ResponseEntity.ok(list);
+    }
+
+
 }

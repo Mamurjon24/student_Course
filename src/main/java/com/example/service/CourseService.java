@@ -2,12 +2,16 @@ package com.example.service;
 
 
 import com.example.dto.CourseDTO;
+import com.example.dto.StudentDTO;
 import com.example.entity.CourseEntity;
+import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +25,7 @@ public class CourseService {
         CourseDTO dto = new CourseDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setPrice(entity.getPrice());
+        dto.setPrise(entity.getPrise());
         dto.setCreatedDate(entity.getCreatedDate());
         dto.setDuration(entity.getDuration());
         return dto;
@@ -30,7 +34,7 @@ public class CourseService {
     public boolean update(Integer id, CourseDTO dto) {
         CourseEntity entity = get(id);
         entity.setName(dto.getName());
-        entity.setPrice(dto.getPrice());
+        entity.setPrise(dto.getPrise());
         entity.setDuration(dto.getDuration());
         entity.setCreatedDate(dto.getCreatedDate());
         courseRepository.save(entity);
@@ -45,7 +49,7 @@ public class CourseService {
         }
         entity.setCreatedDate(dto.getCreatedDate());
         entity.setDuration(dto.getDuration());
-        entity.setPrice(dto.getPrice());
+        entity.setPrise(dto.getPrise());
         courseRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
@@ -59,7 +63,7 @@ public class CourseService {
             CourseDTO dto = new CourseDTO();
             dto.setId(entity.getId());
             dto.setName(entity.getName());
-            dto.setPrice(entity.getPrice());
+            dto.setPrise(entity.getPrise());
             dto.setCreatedDate(entity.getCreatedDate());
             dto.setDuration(entity.getDuration());
             dtoList.add(dto);
@@ -92,7 +96,7 @@ public class CourseService {
         CourseDTO dto = new CourseDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setPrice(entity.getPrice());
+        dto.setPrise(entity.getPrise());
         dto.setDuration(entity.getDuration());
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
@@ -101,10 +105,65 @@ public class CourseService {
         CourseEntity entity = new CourseEntity();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
-        entity.setPrice(dto.getPrice());
+        entity.setPrise(dto.getPrise());
         entity.setDuration(dto.getDuration());
         entity.setCreatedDate(dto.getCreatedDate());
         return entity;
     }
 
+    public CourseDTO getByName(String name) {
+        Optional<CourseEntity> optional = courseRepository.findByName(name);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("Course not found: " + name);
+        }
+        return convertToDTO(optional.get());
+    }
+
+    public CourseDTO getByPrise(Double prise) {
+        Optional<CourseEntity> optional = courseRepository.findByPrise(prise);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("Course not found: " + prise);
+        }
+        return convertToDTO(optional.get());
+    }
+
+    public CourseDTO getByDuration(Long duration) {
+        Optional<CourseEntity> optional = courseRepository.findByDuration(duration);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("Course not found: " + duration);
+        }
+        return convertToDTO(optional.get());
+    }
+
+    public List<CourseDTO> getByBeetwenPrise(Double beginPrise, Double endPrise) {
+        Iterable<CourseEntity> iterable = courseRepository.findByPriseBetween(beginPrise,endPrise);
+        List<CourseDTO> dtoList = new LinkedList<>();
+        iterable.forEach(entity -> {
+            CourseDTO dto = new CourseDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrise(entity.getPrise());
+            dto.setDuration(entity.getDuration());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        });
+        return dtoList;
+    }
+
+    public List<CourseDTO> getByBeetwenDate(LocalDate beginDate, LocalDate endDate) {
+        LocalDateTime begin = beginDate.atStartOfDay();
+        LocalDateTime end = endDate.atStartOfDay();
+        Iterable<CourseEntity> iterable = courseRepository.findByCreatedDateBetween(begin,end);
+        List<CourseDTO> dtoList = new LinkedList<>();
+        iterable.forEach(entity -> {
+            CourseDTO dto = new CourseDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrise(entity.getPrise());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setDuration(entity.getDuration());
+            dtoList.add(dto);
+        });
+        return dtoList;
+    }
 }

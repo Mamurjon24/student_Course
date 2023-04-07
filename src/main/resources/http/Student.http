@@ -53,7 +53,28 @@ Content-Type: application/json
 
 
 ### Student Get Id
-GET http://localhost:8080/student/get/1
+GET http://localhost:8080/student/get/
 
 ### Student Delete
-DELETE http://localhost:8080/student/delete/1
+DELETE http://localhost:8080/student/delete/
+
+### Student GetByName
+GET http://localhost:8080/student/getByName/Ali
+
+### Student GetBySurName
+GET http://localhost:8080/student/getBySurName/Aliyev
+
+### Student GetByLevel
+GET http://localhost:8080/student/getByLevel/2
+
+### Student GetByAge
+GET http://localhost:8080/student/getByAge/19
+
+### Student GetByGender
+GET http://localhost:8080/student/getByGender/WOMAN
+
+### Student getByDate
+GET http://localhost:8080/student/getByDate/2023-04-06
+
+### Student GetByBeetwenDate
+GET http://localhost:8080/student/getByBeetwenDate?beginDate=2023-04-06&endDay=2023-04-08

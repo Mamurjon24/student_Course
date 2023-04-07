@@ -8,20 +8,20 @@ Content-Type: application/json
 
 {
   "student": {
-    "id": 1,
+    "id": 2,
     "name": "Vali",
     "surName": "Valiev",
     "level": 1,
     "age": 18,
     "gender": "MAN",
-    "createdDate": "2023-04-05T15:21:17.5795324"
+    "createdDay": "2023-04-07T16:57:46.372009"
   },
   "course":  {
-    "id": 1,
+    "id": 2,
     "name": "1C",
-    "price": 100.0,
+    "prise": 100.0,
     "duration": 6,
-    "createdDate": "2023-04-05T15:21:06.342104"
+    "createdDate": "2023-04-07T16:55:54.898449"
   },
   "mark": 5
 }
@@ -67,29 +67,34 @@ Content-Type: application/json
 ]
 
 ### StudentCourse Update
-PUT http://localhost:8080/studentcourse/update/
+PUT http://localhost:8080/studentcourse/update/1
 Content-Type: application/json
 
 {
   "student": {
-    "name": "Rashid",
-    "surName": "Rashidov",
-    "phone": "5",
-    "createdDate": "1999-12-11"
+    "id": 1,
+    "name": "Ali",
+    "surName": "Aliyev",
+    "level": 2,
+    "age": 18,
+    "gender": "MAN",
+    "createdDate": "2023-04-05T15:21:17.5795324"
   },
-  "book": {
-    "title": "Go",
-    "author": "Clarc",
-    "publishYear": "2015-06-14"
+  "course":  {
+    "id": 1,
+    "name": "Java",
+    "prise": 900.0,
+    "duration": 9,
+    "createdDate": "2023-04-07T16:55:50.440677"
   },
-  "createdDate": "2023-03-10",
-  "returnedDate": "2023-03-22",
-  "duration": "12 days"
+  "mark": 6
 }
-
 
 ### StudentCourse Get Id
 GET http://localhost:8080/studentcourse/get/1
 
 ### StudentCourse Delete
-DELETE http://localhost:8080/studentcourse/delete/
+DELETE http://localhost:8080/studentcourse/delete/1
+
+### StudentCourse GetMarkByStudentAndCreatedDate
+GET http://localhost:8080/studentcourse/getMarkByStudentAndCreatedDate?studentId=2&startDate=2023-04-06&endDate=2023-04-10
