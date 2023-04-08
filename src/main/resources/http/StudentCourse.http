@@ -28,43 +28,104 @@ Content-Type: application/json
 
 
 ### StudentCourse Create List
-POST http://localhost:8080/studentBook/create/allStudentBook
+POST http://localhost:8080/studentcourse/create
 Content-Type: application/json
 
-[
-  {
-    "student": {
-      "name": "Toshmat",
-      "surName": "Toshmatov",
-      "phone": "3",
-      "createdDate": "2002-11-05"
-    },
-    "book": {
-      "title": "JavaScript",
-      "author": "Eshmat",
-      "publishYear": "2005-06-03"
-    },
-    "createdDate": "2023-03-20",
-    "returnedDate": "2023-03-30",
-    "duration": "10 days"
+//{
+//  "student": {
+//    "id": 3,
+//    "name": "Natasha",
+//    "surName": "Bereznova",
+//    "level": 5,
+//    "age": 22,
+//    "gender": "WOMAN",
+//    "createdDay": "2023-04-08T13:42:58.900413"
+//  },
+//  "course":  {
+//    "id": 3,
+//    "name": "HTML",
+//    "prise": 300.0,
+//    "duration": 3,
+//    "createdDate": "2023-04-08T13:40:21.032401"
+//  },
+//  "mark": 8
+//}
+//{
+//  "student": {
+//    "id": 4,
+//    "name": "Eshmat",
+//    "surName": "Eshmatov",
+//    "level": 4,
+//    "age": 22,
+//    "gender": "MAN",
+//    "createdDay": "2023-04-08T13:43:24.187807"
+//  },
+//  "course": {
+//    "id": 4,
+//    "name": "CSS",
+//    "prise": 200.0,
+//    "duration": 2,
+//    "createdDate": "2023-04-08T13:40:42.07221"
+//  },
+//  "mark": 3
+//}
+//{
+//  "student": {
+//    "id": 5,
+//    "name": "Aliya",
+//    "surName": "Aliyaeva",
+//    "level": 3,
+//    "age": 19,
+//    "gender": "WOMAN",
+//    "createdDay": "2023-04-08T13:43:38.10061"
+//  },
+//  "course":  {
+//    "id": 5,
+//    "name": "Pyton",
+//    "prise": 800.0,
+//    "duration": 8,
+//    "createdDate": "2023-04-08T13:41:10.004532"
+//  },
+//  "mark": 19
+//}
+//{
+//  "student": {
+//    "id": 5,
+//    "name": "Aliya",
+//    "surName": "Aliyaeva",
+//    "level": 3,
+//    "age": 19,
+//    "gender": "WOMAN",
+//    "createdDay": "2023-04-08T13:43:38.10061"
+//  },
+//  "course": {
+//    "id": 4,
+//    "name": "CSS",
+//    "prise": 200.0,
+//    "duration": 2,
+//    "createdDate": "2023-04-08T13:40:42.07221"
+//  },
+//  "mark": 12
+//}
+{
+  "student": {
+    "id": 5,
+    "name": "Aliya",
+    "surName": "Aliyaeva",
+    "level": 3,
+    "age": 19,
+    "gender": "WOMAN",
+    "createdDay": "2023-04-08T13:43:38.10061"
   },
-  {
-    "student": {
-      "name": "Jabbor",
-      "surName": "Jabborov",
-      "phone": "4",
-      "createdDate": "1999-09-15"
-    },
-    "book": {
-      "title": "C++",
-      "author": "Toshmat",
-      "publishYear": "2012-11-11"
-    },
-    "createdDate": "2023-03-01",
-    "returnedDate": "2023-03-15",
-    "duration": "15 days"
-  }
-]
+  "course": {
+    "id": 3,
+    "name": "HTML",
+    "prise": 300.0,
+    "duration": 3,
+    "createdDate": "2023-04-08T13:40:21.032401"
+  },
+  "mark": 1
+}
 
 ### StudentCourse Update
 PUT http://localhost:8080/studentcourse/update/1
@@ -98,3 +159,36 @@ DELETE http://localhost:8080/studentcourse/delete/1
 
 ### StudentCourse GetMarkByStudentAndCreatedDate
 GET http://localhost:8080/studentcourse/getMarkByStudentAndCreatedDate?studentId=2&startDate=2023-04-06&endDate=2023-04-10
+
+### StudentCourse GetAllByStudentIdAndCreatedDateBeforeAndCreatedDateAfter
+GET http://localhost:8080/studentcourse/getAllByStudentIdAndCreatedDateBeforeAndCreatedDateAfter?studentId=2&startDate=2023-04-06&endDate=2023-04-10
+
+### StudentCourse GetStudentCourseEntitiesByStudentIdAndCourseIdOrderByCreatedDateDesc
+GET http://localhost:8080/studentcourse/getStudentCourseEntitiesByStudentIdAndCourseIdOrderByCreatedDateDesc?studentId=5&courseId=5
+
+### StudentCourse getMarkByStudentIdAndCourseIdByCreatedDateSql
+GET http://localhost:8080/studentcourse/getMarkByStudentIdAndCourseIdByCreatedDateSql?studentId=5&courseId=5
+
+### StudentCourse findAllByStudentIdOrderByCreatedDateDesc
+GET http://localhost:8080/studentcourse/findAllByStudentIdOrderByCreatedDateDesc/5
+
+### StudentCourse findAllByStudentIdOrderByCreatedDateDescSql
+GET http://localhost:8080/studentcourse/findAllByStudentIdOrderByCreatedDateDescSql?studentId=5
+
+### StudentCourse getStudentCourseNameByMarkAscSql
+GET http://localhost:8080/studentcourse/getStudentCourseNameByMarkAscSql?studentId=5
+
+### StudentCourse findMaxThreeMarksOfStudent
+GET http://localhost:8080/studentcourse/findMaxThreeMarksOfStudent/5
+
+### StudentCourse findFirstMarkByStudentId
+GET http://localhost:8080/studentcourse/findFirstMarkByStudentId/5
+
+### StudentCourse findMaxMarkOfStudentByCourse
+GET http://localhost:8080/studentcourse/findMaxMarkOfStudentByCourse?studentId=5&courseId=3
+
+### StudentCourse findAvgMarkOfStudentByCourse
+GET http://localhost:8080/studentcourse/findAvgMarkOfStudentByCourse?studentId=5&courseId=3
+
+### StudentCourse findCountMarksOfStudentFromGivenMark
+GET http://localhost:8080/studentcourse/findCountMarksOfStudentFromGivenMark?studentId=5&givenMark=19

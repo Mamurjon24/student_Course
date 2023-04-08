@@ -16,23 +16,21 @@ Content-Type: application/json
 POST http://localhost:8080/course/create
 Content-Type: application/json
 
-[
-  {
-    "name": "C#",
-    "price": 500,
-    "duration": 9.0
-  },
-  {
-    "name": "HTML",
-    "price": 300,
-    "duration": 2.0
-  },
-  {
-    "name": "CSS",
-    "price": 200,
-    "duration": 1.0
-  }
-]
+//{
+//  "name": "HTML",
+//  "prise": 300,
+//  "duration": 3.0
+//}
+//{
+//  "name": "CSS",
+//  "prise": 200,
+//  "duration": 2.0
+//}
+{
+  "name": "Pyton",
+  "prise": 800,
+  "duration": 8.5
+}
 
 ### Course Update
 PUT http://localhost:8080/course/update/1

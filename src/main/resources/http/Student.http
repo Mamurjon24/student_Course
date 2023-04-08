@@ -15,29 +15,30 @@ Content-Type: application/json
 }
 
 ### Student Create List
-POST http://localhost:8080/student/create/allStudent
+POST http://localhost:8080/student/create
 Content-Type: application/json
 
-[
-  {
-    "name": "Eshmat",
-    "surName": "Eshmatov",
-    "phone": "2",
-    "createdDate": "2000-01-03"
-  },
-  {
-    "name": "Toshmat",
-    "surName": "Toshmatov",
-    "phone": "3",
-    "createdDate": "2002-11-05"
-  },
-  {
-    "name": "Jabbor",
-    "surName": "Jabborov",
-    "phone": "4",
-    "createdDate": "1999-09-15"
-  }
-]
+//{
+//  "name": "Natasha",
+//  "surName": "Bereznova",
+//  "level": 5,
+//  "age": 22,
+//  "gender": "WOMAN"
+//}
+//{
+//  "name": "Eshmat",
+//  "surName": "Eshmatov",
+//  "level": 4,
+//  "age": 22,
+//  "gender": "MAN"
+//}
+{
+  "name": "Aliya",
+  "surName": "Aliyaeva",
+  "level": 3,
+  "age": 19,
+  "gender": "WOMAN"
+}
 
 ### Student Update
 PUT http://localhost:8080/student/update/1
