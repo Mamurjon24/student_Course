@@ -8,6 +8,7 @@ import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -165,5 +166,68 @@ public class CourseService {
             dtoList.add(dto);
         });
         return dtoList;
+    }
+
+    public Page<CourseDTO> pagingtion(int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        // Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAll(sort);
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Page<CourseEntity> pageObj = courseRepository.findAll(pageable);
+        Long totalCount = pageObj.getTotalElements();
+        List<CourseEntity> entityList = pageObj.getContent();
+        List<CourseDTO> dtoList = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+            CourseDTO dto = new CourseDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrise(entity.getPrise());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setDuration(entity.getDuration());
+            dtoList.add(dto);
+        }
+        Page<CourseDTO> response = new PageImpl<CourseDTO>(dtoList,pageable,totalCount);
+        return response;
+    }
+
+    public Page<CourseDTO> paginationWithPrise(Double prise, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        // Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAll(sort);
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Page<CourseEntity> pageObj = courseRepository.findAllByPrise(prise,pageable);
+        Long totalCount = pageObj.getTotalElements();
+        List<CourseEntity> entityList = pageObj.getContent();
+        List<CourseDTO> dtoList = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+            CourseDTO dto = new CourseDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrise(entity.getPrise());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setDuration(entity.getDuration());
+            dtoList.add(dto);
+        }
+        Page<CourseDTO> response = new PageImpl<CourseDTO>(dtoList,pageable,totalCount);
+        return response;
+    }
+
+    public Page<CourseDTO> paginationWithDateBetween(LocalDateTime fromDate, LocalDateTime toDate, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        // Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAll(sort);
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Page<CourseEntity> pageObj = courseRepository.findAllByCreatedDateBetween(fromDate,toDate,pageable);
+        Long totalCount = pageObj.getTotalElements();
+        List<CourseEntity> entityList = pageObj.getContent();
+        List<CourseDTO> dtoList = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+            CourseDTO dto = new CourseDTO();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrise(entity.getPrise());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dto.setDuration(entity.getDuration());
+            dtoList.add(dto);
+        }
+        Page<CourseDTO> response = new PageImpl<CourseDTO>(dtoList,pageable,totalCount);
+        return response;
     }
 }

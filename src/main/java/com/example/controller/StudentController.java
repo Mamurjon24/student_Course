@@ -1,13 +1,16 @@
 package com.example.controller;
+
+import com.example.dto.StudenFilterByGenderDTO;
 import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterRequestDTO;
 import com.example.enums.StudentGender;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -49,40 +52,70 @@ public class StudentController {
         studentService.test();
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/getByName/{name}")
     public ResponseEntity<?> getByName(@PathVariable("name") String name) {
         StudentDTO dto = studentService.getByName(name);
         return ResponseEntity.ok(dto);
     }
+
     @GetMapping("/getBySurName/{surName}")
     public ResponseEntity<?> getBySurName(@PathVariable("surName") String surName) {
         StudentDTO dto = studentService.getBySurName(surName);
         return ResponseEntity.ok(dto);
     }
+
     @GetMapping("/getByLevel/{level}")
     public ResponseEntity<?> getByLevel(@PathVariable("level") Integer level) {
         StudentDTO dto = studentService.getByLevel(level);
         return ResponseEntity.ok(dto);
     }
+
     @GetMapping("/getByAge/{age}")
     public ResponseEntity<?> getByAge(@PathVariable("age") Integer age) {
         StudentDTO dto = studentService.getByAge(age);
         return ResponseEntity.ok(dto);
     }
+
     @GetMapping("/getByGender/{gender}")
     public ResponseEntity<List<StudentDTO>> getByGender(@PathVariable("gender") StudentGender gender) {
         List<StudentDTO> list = studentService.getByGender(gender);
         return ResponseEntity.ok(list);
     }
+
     @GetMapping("/getByDate/{date}")
     public ResponseEntity<List<StudentDTO>> getByDate(@PathVariable("date") LocalDate date) {
         List<StudentDTO> list = studentService.getByDate(date);
         return ResponseEntity.ok(list);
     }
+
     @GetMapping("/getByBeetwenDate")
-    public ResponseEntity<List<StudentDTO>> getByBeetwenDate (@RequestParam("beginDate") LocalDate beginDate,
-                                                              @RequestParam("endDay") LocalDate endDate) {
-        List<StudentDTO> list = studentService.getByBeetwenDate(beginDate,endDate);
+    public ResponseEntity<List<StudentDTO>> getByBeetwenDate(@RequestParam("beginDate") LocalDate beginDate,
+                                                             @RequestParam("endDay") LocalDate endDate) {
+        List<StudentDTO> list = studentService.getByBeetwenDate(beginDate, endDate);
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/paging")
+    public ResponseEntity<Page<StudentDTO>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                   @RequestParam(value = "size", defaultValue = "2") int size) {
+        Page<StudentDTO> response = studentService.pagingtion(page, size);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/pagingbyStudentLevel")
+    public ResponseEntity<Page<StudentDTO>> pagingWithLevel(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                            @RequestParam(value = "size", defaultValue = "2") int size,
+                                                            @RequestBody StudentFilterRequestDTO filter) {
+        Page<StudentDTO> response = studentService.paginationWithLevel(filter.getLevel(), page, size);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/pagingbyStudentGender")
+    public ResponseEntity<Page<StudentDTO>> pagingbyStudentGender(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                  @RequestParam(value = "size", defaultValue = "2") int size,
+                                                                  @RequestBody StudenFilterByGenderDTO filter) {
+        Page<StudentDTO> response = studentService.paginationWithGender(filter.getGender(), page, size);
+        return ResponseEntity.ok(response);
     }
 }

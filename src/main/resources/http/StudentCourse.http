@@ -157,6 +157,12 @@ GET http://localhost:8080/studentcourse/get/1
 ### StudentCourse Delete
 DELETE http://localhost:8080/studentcourse/delete/1
 
+### StudentCourse test
+GET http://localhost:8080/studentcourse/test
+
+### StudentCourse test
+GET http://localhost:8080/studentcourse/test2
+
 ### StudentCourse GetMarkByStudentAndCreatedDate
 GET http://localhost:8080/studentcourse/getMarkByStudentAndCreatedDate?studentId=2&startDate=2023-04-06&endDate=2023-04-10
 
@@ -166,29 +172,41 @@ GET http://localhost:8080/studentcourse/getAllByStudentIdAndCreatedDateBeforeAnd
 ### StudentCourse GetStudentCourseEntitiesByStudentIdAndCourseIdOrderByCreatedDateDesc
 GET http://localhost:8080/studentcourse/getStudentCourseEntitiesByStudentIdAndCourseIdOrderByCreatedDateDesc?studentId=5&courseId=5
 
-### StudentCourse getMarkByStudentIdAndCourseIdByCreatedDateSql
+### StudentCourse GetMarkByStudentIdAndCourseIdByCreatedDateSql
 GET http://localhost:8080/studentcourse/getMarkByStudentIdAndCourseIdByCreatedDateSql?studentId=5&courseId=5
 
-### StudentCourse findAllByStudentIdOrderByCreatedDateDesc
+### StudentCourse FindAllByStudentIdOrderByCreatedDateDesc
 GET http://localhost:8080/studentcourse/findAllByStudentIdOrderByCreatedDateDesc/5
 
-### StudentCourse findAllByStudentIdOrderByCreatedDateDescSql
+### StudentCourse FindAllByStudentIdOrderByCreatedDateDescSql
 GET http://localhost:8080/studentcourse/findAllByStudentIdOrderByCreatedDateDescSql?studentId=5
 
-### StudentCourse getStudentCourseNameByMarkAscSql
-GET http://localhost:8080/studentcourse/getStudentCourseNameByMarkAscSql?studentId=5
+### StudentCourse GetStudentCourseNameByMarkAscSql
+GET http://localhost:8080/studentcourse/getStudentCourseNameByMarkAscSql?studentId=4
 
-### StudentCourse findMaxThreeMarksOfStudent
+### StudentCourse FindMaxThreeMarksOfStudent
 GET http://localhost:8080/studentcourse/findMaxThreeMarksOfStudent/5
 
-### StudentCourse findFirstMarkByStudentId
+### StudentCourse FindFirstMarkByStudentId
 GET http://localhost:8080/studentcourse/findFirstMarkByStudentId/5
 
-### StudentCourse findMaxMarkOfStudentByCourse
+### StudentCourse FindMaxMarkOfStudentByCourse
 GET http://localhost:8080/studentcourse/findMaxMarkOfStudentByCourse?studentId=5&courseId=3
 
-### StudentCourse findAvgMarkOfStudentByCourse
+### StudentCourse FindAvgMarkOfStudentByCourse
 GET http://localhost:8080/studentcourse/findAvgMarkOfStudentByCourse?studentId=5&courseId=3
 
-### StudentCourse findCountMarksOfStudentFromGivenMark
+### StudentCourse FindCountMarksOfStudentFromGivenMark
 GET http://localhost:8080/studentcourse/findCountMarksOfStudentFromGivenMark?studentId=5&givenMark=19
+
+### StudentCourse FindMaxMarkByCourseId
+GET http://localhost:8080/studentcourse/findMaxMarkByCourseId/5
+
+### StudentCourse Paging
+GET http://localhost:8080/studentcourse/paging?page=1&size=2
+
+### StudentCourse FindFirstMarkByStudentId
+GET http://localhost:8080/studentcourse/findAvgMarkByCourseId/5
+
+### StudentCourse FindFirstMarkByStudentId
+GET http://localhost:8080/studentcourse/findCountMarkByCourseId/5

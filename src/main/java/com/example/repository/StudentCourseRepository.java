@@ -2,8 +2,13 @@ package com.example.repository;
 
 import com.example.entity.StudentCourseEntity;
 import com.example.mapper.StudentMarkAndCourseNameMapper;
+import com.example.mapperInterface.CourseInfoMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public interface StudentCourseRepository extends CrudRepository<StudentCourseEntity, Integer> {
+public interface StudentCourseRepository extends CrudRepository<StudentCourseEntity, Integer>,
+        PagingAndSortingRepository<StudentCourseEntity, Integer> {
 
     //Iterable<StudentCourseEntity> findAllByStudentIdAndCreatedDateBetween(Integer studentId, LocalDateTime startDate,LocalDateTime endDate);
 
@@ -43,6 +49,22 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourseEnt
                                                                                         @Param("courseId") Integer courseId);
 
     //11. Studentni eng oxirda olgan baxosi, va curse nomi.
+
+    @Query(value = "SELECT c.id, c.name " +
+            " from  student_course as scm " +
+            " inner join course as c on c.id = scm.course_id " +
+            " where scm.student_id = :studentId  " +
+            "order by scm.created_date desc limit 1 ", nativeQuery = true)
+    List<Object[]> findLastCourseMarkerAsNative(@Param("studentId") Integer studentId);
+
+    @Query(value = "SELECT scm.student_id as sId, scm.mark as mark, " +
+            "  c.id as cId, c.name as cName " +
+            " from  student_course as scm " +
+            " inner join course as c on c.id = scm.course_id " +
+            " where scm.student_id = :studentId  " +
+            "order by scm.created_date desc limit 1 ", nativeQuery = true)
+    CourseInfoMapper findLastCourseMarkerAsNativeMapping(@Param("studentId") Integer studentId);
+
     @Query("SELECT new com.example.mapper.StudentMarkAndCourseNameMapper(sce.course.name,sce.mark)  FROM StudentCourseEntity as sce WHERE sce.student.id =:studentId ORDER BY sce.createdDate ASC limit 1")
     StudentMarkAndCourseNameMapper getTopStudentCourseMarkByStudentId(@Param("studentId") Integer studentId);
 
@@ -77,5 +99,22 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourseEnt
     @Query("SELECT COUNT(sce) FROM StudentCourseEntity sce WHERE sce.student.id =:studentId AND sce.mark >:givenMark")
     Long getCountMarksOfStudentFromGivenMark(@Param("studentId") Integer studentId, @Param("givenMark") Float givenMark);
 
+    //19. Berilgan Cursdan eng baland baxo.
+    @Query("SELECT MAX (mark) FROM StudentCourseEntity WHERE course.id =:courseId ")
+    Float getMaxMarkByCourseId(@Param("courseId") Integer courseId);
 
+    //Page<StudentCourseEntity> findAllByName(String name, Pageable pageable);
+    //20. Berilgan Cursdan o'lingan o'rtacha baxo.
+    @Query("SELECT AVG (mark) FROM StudentCourseEntity WHERE course.id =:courseId ")
+    Float getAvgMarkByCourseId(@Param("courseId") Integer courseId);
+
+    //21. Berilgan Course dan olingna baxolar soni.
+    @Query("SELECT COUNT (mark) FROM StudentCourseEntity WHERE course.id =:courseId ")
+    Long getCountMarkByCourseId(@Param("courseId") Integer courseId);
+
+    //23. StudentCourseMark pagination by given studentId. List should be sorted by createdDate.
+    Page<StudentCourseEntity> findAllByStudentId(Integer id, Pageable pageable);
+
+    //24. StudentCourseMark pagination by given courseId.  List should be sorted by createdDate.
+    Page<StudentCourseEntity> findAllByCourseId(Integer id, Pageable pageable);
 }

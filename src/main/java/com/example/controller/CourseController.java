@@ -1,10 +1,10 @@
 package com.example.controller;
 
 
-import com.example.dto.CourseDTO;
-import com.example.dto.StudentDTO;
+import com.example.dto.*;
 import com.example.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,9 +78,33 @@ public class CourseController {
 
     @GetMapping("/getByBeetwenDate")
     public ResponseEntity<List<CourseDTO>> getByBeetwenDate(@RequestParam("beginDate") LocalDate beginDate,
-                                                             @RequestParam("endDate") LocalDate endDate) {
+                                                            @RequestParam("endDate") LocalDate endDate) {
         List<CourseDTO> list = courseService.getByBeetwenDate(beginDate, endDate);
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/paging")
+    public ResponseEntity<Page<CourseDTO>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                  @RequestParam(value = "size", defaultValue = "2") int size) {
+        Page<CourseDTO> response = courseService.pagingtion(page, size);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/pagingbyCoursePrise")
+    public ResponseEntity<Page<CourseDTO>> pagingbyCoursePrise(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                               @RequestParam(value = "size", defaultValue = "2") int size,
+                                                               @RequestBody CourseFilterByPrise filter) {
+        Page<CourseDTO> response = courseService.paginationWithPrise(filter.getPrise(), page, size);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/pagingbyCourseDateBetween")
+    public ResponseEntity<Page<CourseDTO>> pagingbyCourseDateBetween(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                     @RequestParam(value = "size", defaultValue = "2") int size,
+                                                                     @RequestBody CourseFilterByDateBetween fromfilter,
+                                                                     @RequestBody CourseFilterByDateBetween tofilter) {
+        Page<CourseDTO> response = courseService.paginationWithDateBetween(fromfilter.getFromDate(),tofilter.getToDate(), page, size);
+        return ResponseEntity.ok(response);
     }
 
 
