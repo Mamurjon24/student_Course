@@ -1,8 +1,6 @@
 package com.example.controller;
 
 import com.example.dto.*;
-import com.example.entity.StudentCourseEntity;
-import com.example.entity.StudentEntity;
 import com.example.mapper.StudentMarkAndCourseNameMapper;
 import com.example.service.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -189,6 +185,11 @@ public class StudentCourseController {
                                                                      @RequestBody StudentCourseGetByCourseIdDTO filter) {
         Page<StudentCourseDTO> response = studentCourseService.pagingWithCoursetId(filter.getId(), page, size);
         return ResponseEntity.ok(response);
+    }
+    @PostMapping(value = "/filter")
+    public ResponseEntity<?> filter(@RequestBody StudentCourseFilterRequestDTO filterDTO) {
+        studentCourseService.filter(filterDTO);
+        return ResponseEntity.ok().build();
     }
 
 }

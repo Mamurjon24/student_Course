@@ -31,44 +31,44 @@ Content-Type: application/json
 POST http://localhost:8080/studentcourse/create
 Content-Type: application/json
 
-//{
-//  "student": {
-//    "id": 3,
-//    "name": "Natasha",
-//    "surName": "Bereznova",
-//    "level": 5,
-//    "age": 22,
-//    "gender": "WOMAN",
-//    "createdDay": "2023-04-08T13:42:58.900413"
-//  },
-//  "course":  {
-//    "id": 3,
-//    "name": "HTML",
-//    "prise": 300.0,
-//    "duration": 3,
-//    "createdDate": "2023-04-08T13:40:21.032401"
-//  },
-//  "mark": 8
-//}
-//{
-//  "student": {
-//    "id": 4,
-//    "name": "Eshmat",
-//    "surName": "Eshmatov",
-//    "level": 4,
-//    "age": 22,
-//    "gender": "MAN",
-//    "createdDay": "2023-04-08T13:43:24.187807"
-//  },
-//  "course": {
-//    "id": 4,
-//    "name": "CSS",
-//    "prise": 200.0,
-//    "duration": 2,
-//    "createdDate": "2023-04-08T13:40:42.07221"
-//  },
-//  "mark": 3
-//}
+{
+  "student": {
+    "id": 3,
+    "name": "Natasha",
+    "surName": "Bereznova",
+    "level": 5,
+    "age": 22,
+    "gender": "WOMAN",
+    "createdDay": "2023-04-08T13:42:58.900413"
+  },
+  "course":  {
+    "id": 3,
+    "name": "HTML",
+    "prise": 300.0,
+    "duration": 3,
+    "createdDate": "2023-04-08T13:40:21.032401"
+  },
+  "mark": 8
+}
+{
+  "student": {
+    "id": 4,
+    "name": "Eshmat",
+    "surName": "Eshmatov",
+    "level": 4,
+    "age": 22,
+    "gender": "MAN",
+    "createdDay": "2023-04-08T13:43:24.187807"
+  },
+  "course": {
+    "id": 4,
+    "name": "CSS",
+    "prise": 200.0,
+    "duration": 2,
+    "createdDate": "2023-04-08T13:40:42.07221"
+  },
+  "mark": 3
+}
 //{
 //  "student": {
 //    "id": 5,
@@ -107,25 +107,25 @@ Content-Type: application/json
 //  },
 //  "mark": 12
 //}
-{
-  "student": {
-    "id": 5,
-    "name": "Aliya",
-    "surName": "Aliyaeva",
-    "level": 3,
-    "age": 19,
-    "gender": "WOMAN",
-    "createdDay": "2023-04-08T13:43:38.10061"
-  },
-  "course": {
-    "id": 3,
-    "name": "HTML",
-    "prise": 300.0,
-    "duration": 3,
-    "createdDate": "2023-04-08T13:40:21.032401"
-  },
-  "mark": 1
-}
+//{
+//  "student": {
+//    "id": 5,
+//    "name": "Aliya",
+//    "surName": "Aliyaeva",
+//    "level": 3,
+//    "age": 19,
+//    "gender": "WOMAN",
+//    "createdDay": "2023-04-08T13:43:38.10061"
+//  },
+//  "course": {
+//    "id": 3,
+//    "name": "HTML",
+//    "prise": 300.0,
+//    "duration": 3,
+//    "createdDate": "2023-04-08T13:40:21.032401"
+//  },
+//  "mark": 1
+//}
 
 ### StudentCourse Update
 PUT http://localhost:8080/studentcourse/update/1
@@ -202,11 +202,22 @@ GET http://localhost:8080/studentcourse/findCountMarksOfStudentFromGivenMark?stu
 ### StudentCourse FindMaxMarkByCourseId
 GET http://localhost:8080/studentcourse/findMaxMarkByCourseId/5
 
-### StudentCourse Paging
-GET http://localhost:8080/studentcourse/paging?page=1&size=2
-
 ### StudentCourse FindFirstMarkByStudentId
 GET http://localhost:8080/studentcourse/findAvgMarkByCourseId/5
 
 ### StudentCourse FindFirstMarkByStudentId
 GET http://localhost:8080/studentcourse/findCountMarkByCourseId/5
+
+### StudentCourse Paging
+POST http://localhost:8080/studentcourse/paging
+
+### Course filter
+POST localhost:8080/studentcourse/filter
+Content-Type: application/json
+
+{
+  "studentId": 2,
+  "courseId": 2
+}
+
+

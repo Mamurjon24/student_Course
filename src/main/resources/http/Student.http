@@ -18,13 +18,13 @@ Content-Type: application/json
 POST http://localhost:8080/student/create
 Content-Type: application/json
 
-//{
-//  "name": "Natasha",
-//  "surName": "Bereznova",
-//  "level": 5,
-//  "age": 22,
-//  "gender": "WOMAN"
-//}
+{
+  "name": "Natasha",
+  "surName": "Bereznova",
+  "level": 5,
+  "age": 22,
+  "gender": "WOMAN"
+}
 //{
 //  "name": "Eshmat",
 //  "surName": "Eshmatov",
@@ -32,13 +32,6 @@ Content-Type: application/json
 //  "age": 22,
 //  "gender": "MAN"
 //}
-{
-  "name": "Aliya",
-  "surName": "Aliyaeva",
-  "level": 3,
-  "age": 19,
-  "gender": "WOMAN"
-}
 
 ### Student Update
 PUT http://localhost:8080/student/update/1
@@ -79,3 +72,32 @@ GET http://localhost:8080/student/getByDate/2023-04-06
 
 ### Student GetByBeetwenDate
 GET http://localhost:8080/student/getByBeetwenDate?beginDate=2023-04-06&endDay=2023-04-08
+
+### StudentCourse Paging
+POST http://localhost:8080/student/paging
+Content-Type: application/json
+
+### Student pagingbyStudentLevel
+POST localhost:8080/student/pagingbyStudentLevel
+Content-Type: application/json
+
+{
+  "level" : 2
+}
+
+### Student pagingbyStudentLevel
+POST localhost:8080/student/pagingbyStudentGender
+Content-Type: application/json
+
+{
+  "gender": "MAN"
+}
+
+### Student filter
+POST localhost:8080/student/filter
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "surName": "Aliyev"
+}

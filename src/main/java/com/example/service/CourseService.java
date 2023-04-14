@@ -2,10 +2,13 @@ package com.example.service;
 
 
 import com.example.dto.CourseDTO;
+import com.example.dto.CoursefFlterRequestDTO;
 import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterRequestTwoDTO;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
+import com.example.repository.CourseCustomRepository;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -21,6 +24,8 @@ import java.util.Optional;
 public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private CourseCustomRepository courseCustomRepository;
     public CourseDTO getById(Integer id) {
         CourseEntity entity = get(id);
         CourseDTO dto = new CourseDTO();
@@ -229,5 +234,9 @@ public class CourseService {
         }
         Page<CourseDTO> response = new PageImpl<CourseDTO>(dtoList,pageable,totalCount);
         return response;
+    }
+    public void filter(CoursefFlterRequestDTO filterDTO){
+        List<CourseEntity> list = courseCustomRepository.filter(filterDTO);
+        System.out.println(list);
     }
 }

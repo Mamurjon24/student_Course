@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.StudenFilterByGenderDTO;
 import com.example.dto.StudentDTO;
 import com.example.dto.StudentFilterRequestDTO;
+import com.example.dto.StudentFilterRequestTwoDTO;
 import com.example.enums.StudentGender;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class StudentController {
     @GetMapping(value = "/test")
     public ResponseEntity<?> test() {
         studentService.test();
+        studentService.test1();
         return ResponseEntity.ok().build();
     }
 
@@ -96,7 +98,7 @@ public class StudentController {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(value = "/paging")
+    @PostMapping(value = "/paging")
     public ResponseEntity<Page<StudentDTO>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
                                                    @RequestParam(value = "size", defaultValue = "2") int size) {
         Page<StudentDTO> response = studentService.pagingtion(page, size);
@@ -117,5 +119,10 @@ public class StudentController {
                                                                   @RequestBody StudenFilterByGenderDTO filter) {
         Page<StudentDTO> response = studentService.paginationWithGender(filter.getGender(), page, size);
         return ResponseEntity.ok(response);
+    }
+    @PostMapping(value = "/filter")
+    public ResponseEntity<?> filter(@RequestBody StudentFilterRequestTwoDTO filterDTO) {
+        studentService.filter(filterDTO);
+        return ResponseEntity.ok().build();
     }
 }

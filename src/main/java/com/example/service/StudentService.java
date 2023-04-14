@@ -1,9 +1,11 @@
 package com.example.service;
 
 import com.example.dto.StudentDTO;
+import com.example.dto.StudentFilterRequestTwoDTO;
 import com.example.entity.StudentEntity;
 import com.example.enums.StudentGender;
 import com.example.exp.AppBadRequestException;
+import com.example.repository.StudentCustomRepository;
 import com.example.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -19,6 +21,8 @@ import java.util.Optional;
 public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private StudentCustomRepository studentCustomRepository;
 
     public StudentDTO getById(Integer id) {
         StudentEntity entity = get(id);
@@ -279,5 +283,13 @@ public class StudentService {
         }
         Page<StudentDTO> response = new PageImpl<StudentDTO>(dtoList,pageable,totalCount);
         return response;
+    }
+    public void test1(){
+        List<StudentEntity> list = studentCustomRepository.getAll();
+        System.out.println(list);
+    }
+    public void filter(StudentFilterRequestTwoDTO filterDTO){
+        List<StudentEntity> list = studentCustomRepository.filter(filterDTO);
+        System.out.println(list);
     }
 }

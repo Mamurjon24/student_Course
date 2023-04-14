@@ -83,7 +83,7 @@ public class CourseController {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(value = "/paging")
+    @PostMapping(value = "/paging")
     public ResponseEntity<Page<CourseDTO>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
                                                   @RequestParam(value = "size", defaultValue = "2") int size) {
         Page<CourseDTO> response = courseService.pagingtion(page, size);
@@ -105,6 +105,11 @@ public class CourseController {
                                                                      @RequestBody CourseFilterByDateBetween tofilter) {
         Page<CourseDTO> response = courseService.paginationWithDateBetween(fromfilter.getFromDate(),tofilter.getToDate(), page, size);
         return ResponseEntity.ok(response);
+    }
+    @PostMapping(value = "/filter")
+    public ResponseEntity<?> filter(@RequestBody CoursefFlterRequestDTO filterDTO) {
+        courseService.filter(filterDTO);
+        return ResponseEntity.ok().build();
     }
 
 
